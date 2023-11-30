@@ -1,0 +1,24 @@
+from importlib import metadata
+from flask import Flask,render_template
+import requests 
+from dotenv import load_dotenv,dotenv_values 
+
+from sqlalchemy import create_engine,MetaData,table,Column,Integer,String
+
+metaData=MetaData()
+
+
+#definicion de tablas
+cities=table('Cities',metadata,
+              Column=('id',Integer(), primary_key=True,autoincrement=True),
+              Column=('id',String(100),nullable=True,unique=True) 
+             )
+
+config = dotenv_values('.env')
+
+
+app = Flask(__name__)
+
+engine=create_engine("sqlite://weather.sqlite")
+
+
